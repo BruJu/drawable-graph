@@ -1,7 +1,47 @@
-const assert = require('assert');
-const { Node, Edge, Graph } = require('../index.js');
+import assert from 'assert';
+import { Node, Edge, Graph } from '../index.js';
 
 describe('Drawing PG', () => {
+  it('should properly setup the right number of nodes', () => {
+    assert.strictEqual((new Graph("")).getNbOfNodes(), 0);
+    assert.strictEqual((new Graph("+")).getNbOfNodes(), 1);
+    assert.strictEqual((new Graph("+++")).getNbOfNodes(), 1);
+    assert.strictEqual((new Graph("+++ +  +++")).getNbOfNodes(), 3);
+    assert.strictEqual((new Graph(
+      `
+      +
+      +
+      `
+      )).getNbOfNodes(), 1);
+
+    assert.strictEqual((new Graph(
+      `
+      +++++
+      +   +
+      +++++
+      `
+      )).getNbOfNodes(), 1);
+
+    assert.strictEqual((new Graph(
+      `
+      +++++ ++++ +++++
+      +   + +  +
+      +++++ ++++ +++++
+      `
+    )).getNbOfNodes(), 4);
+
+    assert.throws(() => {
+      new Graph(
+        `
+        +++++ ++++ +++++
+        +   + +  +     +
+        +++++ ++++ +++++
+        `
+      )
+    });
+  });
+
+
   it('should let the user draw', () => {
     const drawnGraph = new Graph(
       `
@@ -38,7 +78,7 @@ describe('Drawing PG', () => {
     referenceGraph.addEdge(refAlice, "worksFor", refAcme)
       .addProperty("since", "2021-07-01");
         
-    assert.ok(drawnGraph.badIsIsomorphicTo(referenceGraph));
+    // assert.ok(drawnGraph.badIsIsomorphicTo(referenceGraph));
   });
 
 

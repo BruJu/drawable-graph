@@ -1,3 +1,4 @@
+import drawingReader from './src/drawing-reader.js';
 
 /**
  * Something that can have properties
@@ -58,7 +59,7 @@ class PropertyHolder {
 /**
  * A node in the graph
  */
-class Node extends PropertyHolder {
+export class Node extends PropertyHolder {
   /** @type {string[]} */ #labels = [];
 
   /**
@@ -86,7 +87,7 @@ class Node extends PropertyHolder {
 /**
  * An edge in the graph
  */
-class Edge extends PropertyHolder {
+export class Edge extends PropertyHolder {
   /** @type {Node} */ #source;
   /** @type {Node} */ #destination;
   /** @type {string} */ #label;
@@ -133,7 +134,7 @@ class Edge extends PropertyHolder {
 /**
  * A Property Graph
  */
-class Graph {
+export class Graph {
   /** @type {Node[]} */ #nodes = [];
   /** @type {Edge[]} */ #edges = [];
   /** @type {number} */ #nextUniqueId = 1;
@@ -144,7 +145,11 @@ class Graph {
    */
   constructor(drawing) {
     if (drawing !== undefined) {
-      // TODO
+      drawingReader(
+        drawing,
+        (...labels) => this.addNode(...labels),
+        (...args) => this.addEdge(...args)
+      );
     }
   }
 
@@ -205,5 +210,3 @@ class Graph {
     // TODO
   }
 }
-
-module.exports = { Graph, Node, Edge };

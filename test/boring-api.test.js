@@ -1,6 +1,5 @@
-const assert = require('assert');
-const { Graph } = require('../index.js');
-
+import assert from 'assert';
+import { Graph } from '../index.js';
 
 describe('The boring API', () => {
   describe('Graph with nodes', () => {
