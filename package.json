@@ -1,0 +1,11 @@
+{
+  "name": "drawable-graph",
+  "version": "0.0.1",
+  "description": "A drawable graph interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Julian Bruyat <julian@bruy.at>",
+  "license": "MIT"
+}
